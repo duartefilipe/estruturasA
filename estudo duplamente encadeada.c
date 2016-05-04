@@ -1,4 +1,4 @@
-#include<stdio.h>
+	#include<stdio.h>
 #include<stdlib.h>
 
 struct lista{
@@ -38,6 +38,30 @@ lista *insere(lista *l){
 	return l;
 }
 
+lista *deleta(lista *l, int valor){
+	lista *p;
+
+	
+for(p = l; p != NULL; p=p->prox){
+
+		
+		if(p->prox == NULL){
+			printf("valor nao encontrado");
+		}
+	
+		if (p->info == valor){
+			p->ant->prox = p->prox;
+			p->prox->ant = p->ant;
+		}
+		
+		
+	}
+	free(p);
+	return l;
+
+	
+}
+
 void imprime(lista *l){
 	lista *p;
 	for(p = l; p != NULL; p=p->prox){
@@ -49,6 +73,8 @@ main(){
 	lista *l = NULL;
 	char op;
 	op = 's';
+	int del;
+	
 	while( op == 's'){
 		
 		l = insere(l);
@@ -56,6 +82,12 @@ main(){
 		getchar();
 		scanf("%c", &op);
 	}
+	
+	imprime(l);
+	
+	printf("informe um valor para deletar: ");
+	scanf("%d", &del);
+	l = deleta(l, del);
 	
 	imprime(l);
 
