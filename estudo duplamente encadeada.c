@@ -40,25 +40,32 @@ lista *insere(lista *l){
 
 lista *deleta(lista *l, int valor){
 	lista *p;
-
-	
-for(p = l; p != NULL; p=p->prox){
-
-		
-		if(p->prox == NULL){
-			printf("valor nao encontrado");
+	lista *p1;
+	p = l;
+		if(p->info == valor){
+			l=l->prox;
+			l->ant = NULL;
+			free(p);
+			return l;
 		}
+	while(p->prox != NULL){
+		p = p->prox;
+	}
+	if(p->info == valor){
+		p->ant->prox = NULL;
+		free(p);
+		return l;
+	}
 	
-		if (p->info == valor){
-			p->ant->prox = p->prox;
-			p->prox->ant = p->ant;
+	for(p1 = l; p1 != NULL; p1 = p1->prox){
+		if(p1->info == valor){
+			p1->ant->prox = p1->prox;
+			p1->prox->ant = p1->ant;
+			free(p1);
+			return l;
 		}
-		
 		
 	}
-	free(p);
-	return l;
-
 	
 }
 
